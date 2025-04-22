@@ -81,6 +81,18 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+// Update an existing itenary by id
+router.put("/:id", async (req, res) => {
+    try {
+        await Itenary.findByIdAndUpdate(req.params.id, req.body)
+
+        res.redirect("/itenaries");
+    } catch(err) {
+        console.log(err);
+    }
+})
+
+
 // POST Create a new itenary
 router.post("/", async (req, res) => {
   try {
