@@ -59,5 +59,15 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// POST Create a new itenary
+router.post("/", async (req, res) => {
+  try {
+    await Itenary.create(req.body);
+    res.redirect("/itenaries");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 export default router;
