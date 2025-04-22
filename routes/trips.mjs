@@ -70,6 +70,19 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// DELETE a trip by its id
+router.delete("/:id", async (req, res) => {
+    try {
+        await Trip.findByIdAndDelete(req.params.id);
+
+        res.redirect("/trips")
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+
+
 // POST Create a new trip 
 router.post("/", async (req, res) => {
   try {
