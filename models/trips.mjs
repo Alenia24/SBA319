@@ -8,6 +8,6 @@ const tripSchema = new mongoose.Schema({
   price: { type: Number, required: true },
 });
 
-const Trip = mongoose.model("Trip", tripsSchema);
+const Trip = mongoose.model("Trip", tripSchema);
 
 export default Trip;
