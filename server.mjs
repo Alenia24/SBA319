@@ -5,6 +5,7 @@ dotenv.config();
 
 import trips from "./routes/trips.mjs"
 import itenaries from "./routes/itenaries.mjs"
+import passengers from "./routes/passengers.mjs";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/trips", trips)
 app.use("/itenaries", itenaries)
+app.use("/passengers", passengers);
 
 // Mongoose Connection
 mongoose.connect(process.env.ATLAS_URI);
