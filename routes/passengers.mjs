@@ -84,4 +84,14 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// POST Create a new passenger
+router.post("/", async (req, res) => {
+  try {
+    await Passenger.create(req.body);
+    res.redirect("/passengers");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export default router;
