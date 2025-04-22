@@ -84,6 +84,17 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// GET a passenger by its id
+router.get("/:id", async (req, res) => {
+    try {
+        const passenger = await Passenger.findById(req.params.id);
+
+        res.json(passenger)
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 // POST Create a new passenger
 router.post("/", async (req, res) => {
   try {
