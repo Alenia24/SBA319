@@ -54,10 +54,21 @@ router.get("/seed", async (req, res) => {
       },
     ]);
     res.redirect("/trips");
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
   }
 });
+
+// GET a trip by its id
+router.get("/:id", async (req, res) => {
+    try {
+        const trip = await Trip.findById(req.params.id);
+
+        res.json(trip)
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 // POST Create a new trip 
 router.post("/", async (req, res) => {
