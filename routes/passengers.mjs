@@ -95,6 +95,17 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// DELETE a passenger by its id
+router.delete("/:id", async (req, res) => {
+    try {
+        await Passenger.findByIdAndDelete(req.params.id);
+
+        res.redirect("/passengers")
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 // Update an existing passenger by id
 router.put("/:id", async (req, res) => {
     try {
