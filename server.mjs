@@ -3,8 +3,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+import trips from "./routes/trips.mjs"
+
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use("./trips", trips)
 
 // Mongoose Connection
 mongoose.connect(process.env.ATLAS_URI);
