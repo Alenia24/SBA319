@@ -81,6 +81,17 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+// Update an existing trip by id
+router.put("/:id", async (req, res) => {
+    try {
+        await Trip.findByIdAndUpdate(req.params.id, req.body)
+
+        res.redirect("/trips");
+    } catch(err) {
+        console.log(err);
+    }
+})
+
 
 
 // POST Create a new trip 
