@@ -53,7 +53,7 @@ router.get("/seed", async (req, res) => {
         price: 2800,
       },
     ]);
-    res.redirect("/fruits");
+    res.redirect("/trips");
   } catch (error) {
     console.error(error);
   }
