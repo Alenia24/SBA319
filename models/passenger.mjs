@@ -12,7 +12,7 @@ const passengerSchema = new mongoose.Schema(
     email: { type: String, required: true },
     telephone: { type: String, required: true },
     address: { type: String, required: true },
-    emergency_contact: [emergency_contactSchema],
+    emergency_contact: { type: emergency_contactSchema, required: true},
     passport: { type: String, required: true },
   },
   { versionKey: false }
