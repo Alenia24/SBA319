@@ -70,6 +70,17 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// DELETE an itenary by its id
+router.delete("/:id", async (req, res) => {
+    try {
+        await Itenary.findByIdAndDelete(req.params.id);
+
+        res.redirect("/itenaries")
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 // POST Create a new itenary
 router.post("/", async (req, res) => {
   try {
