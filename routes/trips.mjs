@@ -59,4 +59,14 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// POST Create a new trip 
+router.post("/", async (req, res) => {
+  try {
+    await Trip.create(req.body);
+    res.redirect("/trips");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export default router;

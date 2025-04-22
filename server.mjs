@@ -8,6 +8,10 @@ import trips from "./routes/trips.mjs"
 const app = express();
 const port = process.env.PORT || 3000;
 
+//for body parsing
+app.use(express.urlencoded({ extended:true}));
+app.use(express.json());
+
 app.use("/trips", trips)
 
 // Mongoose Connection
