@@ -95,6 +95,17 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// Update an existing passenger by id
+router.put("/:id", async (req, res) => {
+    try {
+        await Passenger.findByIdAndUpdate(req.params.id, req.body)
+
+        res.redirect("/passengers");
+    } catch(err) {
+        console.log(err);
+    }
+})
+
 // POST Create a new passenger
 router.post("/", async (req, res) => {
   try {
