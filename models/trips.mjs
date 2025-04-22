@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const tripsSchema = new mongoose.Schema({
+const tripSchema = new mongoose.Schema({
   name: { type: String, required: true },
   destination: { type: String, required: true },
   start: { type: String, required: true },
