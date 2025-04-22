@@ -59,6 +59,17 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// GET an itenary by its id
+router.get("/:id", async (req, res) => {
+    try {
+        const itenary = await Itenary.findById(req.params.id);
+
+        res.json(itenary)
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 // POST Create a new itenary
 router.post("/", async (req, res) => {
   try {
