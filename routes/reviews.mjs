@@ -70,6 +70,134 @@ router.get("/seed", async (req, res) => {
         review:
           "Amazing mix of stunning coastlines, ancient ruins, and delicious food. Barcelona and Athens were fantastic, and I loved relaxing in the Mediterranean sun.",
       },
+      {
+        name: "Sophia Taylor",
+        trip_name: "Japanese Culture & Cuisine Journey",
+        destination: "Tokyo, Kyoto, Osaka",
+        rating: 9,
+        review:
+          "An immersive cultural experience! The food was exceptional, and exploring ancient temples in Kyoto was unforgettable. Highly recommend the sushi class in Tokyo!",
+      },
+      {
+        name: "Liam Scott",
+        trip_name: "Australian Outback Adventure",
+        destination: "Alice Springs, Uluru, Kings Canyon – Australia",
+        rating: 10,
+        review:
+          "The outback was mesmerizing, with stunning sunsets over Uluru. The camping experience was amazing, and our guide was top-notch!",
+      },
+      {
+        name: "Chloe Johnson",
+        trip_name: "Peruvian Amazon Exploration",
+        destination: "Iquitos, Puerto Maldonado – Peru",
+        rating: 8,
+        review:
+          "A truly wild adventure. The rainforest was stunning, and the wildlife was beyond expectations. The boat trips along the river were especially peaceful.",
+      },
+      {
+        name: "David Thompson",
+        trip_name: "Icelandic Volcanoes & Glaciers Expedition",
+        destination: "Reykjavik, Vik, Jökulsárlón – Iceland",
+        rating: 9,
+        review:
+          "The landscapes were straight out of a dream. Hiking on glaciers and exploring volcanic craters was a bucket list experience. Highly recommend this trip!",
+      },
+      {
+        name: "Charlotte Lewis",
+        trip_name: "South American Wonders",
+        destination: "Machu Picchu, Buenos Aires, Rio de Janeiro",
+        rating: 10,
+        review:
+          "From the Inca ruins to the vibrant streets of Buenos Aires and Rio, this trip was full of highlights. The culture and history were beyond fascinating!",
+      },
+      {
+        name: "William Brown",
+        trip_name: "Egyptian Adventure & Nile Cruise",
+        destination: "Cairo, Luxor, Aswan – Egypt",
+        rating: 10,
+        review:
+          "A truly magical experience. The pyramids were more incredible in person, and the Nile cruise was a serene way to explore ancient Egypt.",
+      },
+      {
+        name: "Isabella Martinez",
+        trip_name: "Thailand Temples & Beaches Tour",
+        destination: "Bangkok, Chiang Mai, Phuket – Thailand",
+        rating: 9,
+        review:
+          "I loved the perfect blend of culture and relaxation. The temples in Chiang Mai were awe-inspiring, and the beaches in Phuket were absolutely breathtaking!",
+      },
+      {
+        name: "Lucas Harris",
+        trip_name: "Canadian Rockies Wilderness Expedition",
+        destination: "Banff, Lake Louise, Jasper – Canada",
+        rating: 10,
+        review:
+          "The mountains were even more stunning in person, with turquoise lakes and towering peaks. A true nature lover’s dream. I can’t wait to go back!",
+      },
+      {
+        name: "Ava Wilson",
+        trip_name: "Bali Wellness & Relaxation Retreat",
+        destination: "Ubud, Nusa Dua – Bali",
+        rating: 9,
+        review:
+          "This was the perfect escape. The yoga and spa sessions were incredibly relaxing, and Bali’s peaceful vibe helped me recharge. Ubud’s rice terraces are stunning!",
+      },
+      {
+        name: "Mason Robinson",
+        trip_name: "Vietnam & Cambodia Heritage Tour",
+        destination: "Hanoi, Halong Bay, Siem Reap – Vietnam, Cambodia",
+        rating: 8,
+        review:
+          "The temples of Angkor Wat were jaw-dropping, and Halong Bay’s limestone cliffs were otherworldly. A fantastic mix of culture and natural beauty.",
+      },
+      {
+        name: "Madeline Wilson",
+        trip_name: "European Christmas Markets Tour",
+        destination: "Germany, Austria, Switzerland",
+        rating: 9,
+        review:
+          "This Christmas tour was magical. The markets in Munich and Vienna were full of holiday cheer, and the snowy streets of Zurich were like something out of a fairy tale.",
+      },
+      {
+        name: "Jack Carter",
+        trip_name: "New Zealand Wilderness Expedition",
+        destination: "Auckland, Queenstown, Milford Sound – New Zealand",
+        rating: 10,
+        review:
+          "A breathtaking experience from start to finish. The hiking in Fiordland National Park and the scenic flight over Milford Sound were truly unforgettable.",
+      },
+      {
+        name: "Grace Evans",
+        trip_name: "Italian Lakes & Alps Adventure",
+        destination: "Lake Como, Dolomites – Italy",
+        rating: 9,
+        review:
+          "A stunning mix of natural beauty and charm. The boat ride on Lake Como was serene, and the mountain hikes in the Dolomites were challenging but rewarding.",
+      },
+      {
+        name: "Ethan James",
+        trip_name: "Patagonian Adventure",
+        destination: "Torres del Paine, Ushuaia – Argentina, Chile",
+        rating: 9,
+        review:
+          "The landscapes were out of this world. Glaciers, lakes, and rugged mountains – this trip was perfect for those who love outdoor adventure!",
+      },
+      {
+        name: "Zoe Green",
+        trip_name: "Spanish Wine & Culinary Tour",
+        destination: "Madrid, Barcelona, La Rioja – Spain",
+        rating: 8,
+        review:
+          "An amazing mix of great food, wine, and culture. Barcelona was full of surprises, and the wine tours in La Rioja were a real highlight.",
+      },
+      {
+        name: "Henry Clark",
+        trip_name: "Polar Bear Safari & Northern Lights",
+        destination: "Churchill, Manitoba – Canada",
+        rating: 10,
+        review:
+          "An epic adventure! We saw polar bears up close and experienced the incredible northern lights. The guides were so knowledgeable and made the trip even more memorable.",
+      },
     ]);
     res.redirect("/reviews");
   } catch (err) {
