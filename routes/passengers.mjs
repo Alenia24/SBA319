@@ -9,7 +9,7 @@ const router = express.Router();
 //     const filter = {};
 
 //     if (req.query.name) {
-//       filter.name = { $regex: req.query.name, $options: "i" };
+//       filter.$text = { $search: req.query.name };
 //     }
 
 //     const passengers = await Passenger.find(filter);
