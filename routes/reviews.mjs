@@ -64,6 +64,17 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// GET a review by its id
+router.get("/:id", async (req, res) => {
+    try {
+        const review = await Review.findById(req.params.id);
+
+        res.json(review)
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 // POST Create a new review 
 router.post("/", async (req, res) => {
   try {
