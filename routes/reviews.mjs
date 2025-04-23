@@ -13,4 +13,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+// POST Create a new review 
+router.post("/", async (req, res) => {
+  try {
+    await Review.create(req.body);
+    res.redirect("/reviews");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export default router;
