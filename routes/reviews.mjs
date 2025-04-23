@@ -6,7 +6,20 @@ const router = express.Router();
 // Get all the reviews
 router.get("/", async (req, res) => {
   try {
-    const reviews = await Review.find();
+    const filter = {};
+
+    if (req.query.trip_name) {
+      filter.trip_name = { $regex: req.query.trip_name, $options: "i" };
+    }
+
+    if (req.query.destination) {
+      filter.destination = { $regex: req.query.destination, $options: "i" };
+    }
+    if (req.query.rating) {
+      filter.rating = Number(req.query.rating) ;
+    }
+
+    const reviews = await Review.find(filter);
     res.json(reviews);
   } catch (err) {
     console.log(err);
