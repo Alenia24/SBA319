@@ -6,7 +6,21 @@ const router = express.Router();
 // Get all the trips
 router.get("/", async (req, res) => {
   try {
-    const trips = await Trip.find();
+    const filter = {};
+
+    if (req.query.price) {
+      filter.price = { $lte: Number(req.query.price) };
+    }
+
+    if (req.query.name) {
+      filter.name = { $regex: req.query.name, $options: "i" };
+    }
+
+    if (req.query.destination) {
+      filter.destination = { $regex: req.query.destination, $options: "i" };
+    }
+
+    const trips = await Trip.find(filter);
     res.json(trips);
   } catch (err) {
     console.log(err);
@@ -61,40 +75,38 @@ router.get("/seed", async (req, res) => {
 
 // GET a trip by its id
 router.get("/:id", async (req, res) => {
-    try {
-        const trip = await Trip.findById(req.params.id);
+  try {
+    const trip = await Trip.findById(req.params.id);
 
-        res.json(trip)
-    } catch (err) {
-        console.log(err);
-    }
-})
+    res.json(trip);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // DELETE a trip by its id
 router.delete("/:id", async (req, res) => {
-    try {
-        await Trip.findByIdAndDelete(req.params.id);
+  try {
+    await Trip.findByIdAndDelete(req.params.id);
 
-        res.redirect("/trips")
-    } catch (err) {
-        console.log(err);
-    }
-})
+    res.redirect("/trips");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // Update an existing trip by id
 router.put("/:id", async (req, res) => {
-    try {
-        await Trip.findByIdAndUpdate(req.params.id, req.body)
+  try {
+    await Trip.findByIdAndUpdate(req.params.id, req.body);
 
-        res.redirect("/trips");
-    } catch(err) {
-        console.log(err);
-    }
-})
+    res.redirect("/trips");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-
-
-// POST Create a new trip 
+// POST Create a new trip
 router.post("/", async (req, res) => {
   try {
     await Trip.create(req.body);
