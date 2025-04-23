@@ -6,7 +6,13 @@ const router = express.Router();
 // Get all the passengers
 // router.get("/", async (req, res) => {
 //   try {
-//     const passengers = await Passenger.find();
+//     const filter = {};
+
+//     if (req.query.name) {
+//       filter.name = { $regex: req.query.name, $options: "i" };
+//     }
+
+//     const passengers = await Passenger.find(filter);
 //     res.json(passengers);
 //   } catch (err) {
 //     console.log(err);
