@@ -86,6 +86,17 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+// Update an existing review by id
+router.put("/:id", async (req, res) => {
+    try {
+        await Review.findByIdAndUpdate(req.params.id, req.body)
+
+        res.redirect("/reviews");
+    } catch(err) {
+        console.log(err);
+    }
+})
+
 // POST Create a new review 
 router.post("/", async (req, res) => {
   try {
