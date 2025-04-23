@@ -6,7 +6,17 @@ const router = express.Router();
 // Get all the itenaries
 router.get("/", async (req, res) => {
   try {
-    const itenaries = await Itenary.find();
+    const filter = {};
+
+    if (req.query.name) {
+      filter.name = { $regex: req.query.name, $options: "i" };
+    }
+
+    if (req.query.location) {
+      filter.location = { $regex: req.query.location, $options: "i" };
+    }
+
+    const itenaries = await Itenary.find(filter);
     res.json(itenaries);
   } catch (err) {
     console.log(err);
