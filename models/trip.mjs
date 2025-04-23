@@ -9,6 +9,9 @@ const tripSchema = new mongoose.Schema(
     price: { type: Number, required: true },
 },{ versionKey: false });
 
+
+tripSchema.index({ price: 1 });   
+
 const Trip = mongoose.model("Trip", tripSchema);
 
 export default Trip;
