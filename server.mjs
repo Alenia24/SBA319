@@ -30,6 +30,12 @@ app.get("/", (req, res) => {
     res.send("Welcome to the API.")
 })
 
+// 404 Middleware
+app.use((req, res) => {
+  res.status(404);
+  res.json("Resource Not Found");
+});
+
 // App.listen
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);

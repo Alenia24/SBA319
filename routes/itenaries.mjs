@@ -4,7 +4,7 @@ import Itenary from "../models/itenary.mjs";
 const router = express.Router();
 
 // Get all the itenaries
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const filter = {};
 
@@ -17,9 +17,14 @@ router.get("/", async (req, res) => {
     }
 
     const itenaries = await Itenary.find(filter);
+
+    if (!itenaries || itenaries.length === 0) {
+      return res.json("No itenaries found.");
+    }
+
     res.json(itenaries);
   } catch (err) {
-    console.log(err);
+    res.json({ message: "Not found." });
   }
 });
 
@@ -175,38 +180,40 @@ router.get("/seed", async (req, res) => {
 });
 
 // GET an itenary by its id
-router.get("/:id", async (req, res) => {
-    try {
-        const itenary = await Itenary.findById(req.params.id);
+router.get("/:id", async (req, res, next) => {
+  try {
+    const itenary = await Itenary.findById(req.params.id);
 
-        res.json(itenary)
-    } catch (err) {
-        console.log(err);
+    if (!itenary) {
+      res.json({ message: "No Itenary found" });
     }
-})
+    res.json(itenary);
+  } catch (err) {
+    res.json({ message: "Invalid itenary ID" });
+  }
+});
 
 // DELETE an itenary by its id
 router.delete("/:id", async (req, res) => {
-    try {
-        await Itenary.findByIdAndDelete(req.params.id);
+  try {
+    await Itenary.findByIdAndDelete(req.params.id);
 
-        res.redirect("/itenaries")
-    } catch (err) {
-        console.log(err);
-    }
-})
+    res.redirect("/itenaries");
+  } catch (err) {
+    res.json({ message: "Invalid itenary ID" });
+  }
+});
 
 // Update an existing itenary by id
 router.put("/:id", async (req, res) => {
-    try {
-        await Itenary.findByIdAndUpdate(req.params.id, req.body)
+  try {
+    await Itenary.findByIdAndUpdate(req.params.id, req.body);
 
-        res.redirect("/itenaries");
-    } catch(err) {
-        console.log(err);
-    }
-})
-
+    res.redirect("/itenaries");
+  } catch (err) {
+    res.json({ message: "Invalid itenary ID" });
+  }
+});
 
 // POST Create a new itenary
 router.post("/", async (req, res) => {
@@ -214,9 +221,8 @@ router.post("/", async (req, res) => {
     await Itenary.create(req.body);
     res.redirect("/itenaries");
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 });
-
 
 export default router;
