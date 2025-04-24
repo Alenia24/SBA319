@@ -10,7 +10,7 @@ const tripSchema = new mongoose.Schema(
 },{ versionKey: false });
 
 
-tripSchema.index({ price: 1 });   
+tripSchema.index({ price: -1 });   
 
 const Trip = mongoose.model("Trip", tripSchema);
 
