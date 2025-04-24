@@ -4,20 +4,24 @@ import Passenger from "../models/passenger.mjs";
 const router = express.Router();
 
 // Get all the passengers
-// router.get("/", async (req, res) => {
-//   try {
-//     const filter = {};
+router.get("/", async (req, res) => {
+  try {
+    const filter = {};
 
-//     if (req.query.name) {
-//       filter.$text = { $search: req.query.name };
-//     }
+    if (req.query.name) {
+      filter.$text = { $search: req.query.name };
+    }
 
-//     const passengers = await Passenger.find(filter);
-//     res.json(passengers);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+    const passengers = await Passenger.find(filter);
+
+    if (!passengers || passengers.length === 0) {
+      return res.json("No Passengers found.");
+    }
+    res.json(passengers);
+  } catch (err) {
+    res.json(err.message);
+  }
+});
 
 // SEED the route(database)
 router.get("/seed", async (req, res) => {
@@ -254,42 +258,45 @@ router.get("/seed", async (req, res) => {
     ]);
     res.redirect("/passengers");
   } catch (err) {
-    console.error(err);
+    res.json(err.message);
   }
 });
 
 // GET a passenger by its id
 router.get("/:id", async (req, res) => {
-    try {
-        const passenger = await Passenger.findById(req.params.id);
+  try {
+    const passenger = await Passenger.findById(req.params.id);
 
-        res.json(passenger)
-    } catch (err) {
-        console.log(err);
+    if (!passenger) {
+      res.json({ message: "No passenger found." });
     }
-})
+    res.json(passenger);
+  } catch (err) {
+    res.json({ message: "Invalid passenger ID" });
+  }
+});
 
 // DELETE a passenger by its id
 router.delete("/:id", async (req, res) => {
-    try {
-        await Passenger.findByIdAndDelete(req.params.id);
+  try {
+    await Passenger.findByIdAndDelete(req.params.id);
 
-        res.redirect("/passengers")
-    } catch (err) {
-        console.log(err);
-    }
-})
+    res.redirect("/passengers");
+  } catch (err) {
+    res.json({ message: "Invalid passenger ID" });
+  }
+});
 
 // Update an existing passenger by id
 router.put("/:id", async (req, res) => {
-    try {
-        await Passenger.findByIdAndUpdate(req.params.id, req.body)
+  try {
+    await Passenger.findByIdAndUpdate(req.params.id, req.body);
 
-        res.redirect("/passengers");
-    } catch(err) {
-        console.log(err);
-    }
-})
+    res.redirect("/passengers");
+  } catch (err) {
+    res.json({ message: "Invalid passenger ID" });
+  }
+});
 
 // POST Create a new passenger
 router.post("/", async (req, res) => {
@@ -297,7 +304,7 @@ router.post("/", async (req, res) => {
     await Passenger.create(req.body);
     res.redirect("/passengers");
   } catch (err) {
-    console.log(err);
+    res.json(err.message);
   }
 });
 
