@@ -21,9 +21,13 @@ router.get("/", async (req, res) => {
     }
 
     const trips = await Trip.find(filter);
+
+    if (!trips || trips.length === 0) {
+      return res.json("No trips found.");
+    }
     res.json(trips);
   } catch (err) {
-    console.log(err);
+    res.json("Not found.");
   }
 });
 
@@ -174,7 +178,7 @@ router.get("/seed", async (req, res) => {
     ]);
     res.redirect("/trips");
   } catch (err) {
-    console.error(err);
+    res.json(err.message);
   }
 });
 
@@ -183,9 +187,14 @@ router.get("/:id", async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
 
+    if (!trip) {
+      res.json({ message: "No trip found" });
+    }
+
     res.json(trip);
   } catch (err) {
-    console.log(err);
+        res.json({ message: "Invalid trip ID" });
+
   }
 });
 
@@ -196,7 +205,7 @@ router.delete("/:id", async (req, res) => {
 
     res.redirect("/trips");
   } catch (err) {
-    console.log(err);
+    res.json({ message: "Invalid trip ID" });
   }
 });
 
@@ -207,7 +216,7 @@ router.put("/:id", async (req, res) => {
 
     res.redirect("/trips");
   } catch (err) {
-    console.log(err);
+    res.json({ message: "Invalid trip ID" });
   }
 });
 
@@ -217,7 +226,7 @@ router.post("/", async (req, res) => {
     await Trip.create(req.body);
     res.redirect("/trips");
   } catch (err) {
-    console.log(err);
+    res.json(err.message);
   }
 });
 

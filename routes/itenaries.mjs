@@ -175,7 +175,7 @@ router.get("/seed", async (req, res) => {
     ]);
     res.redirect("/itenaries");
   } catch (err) {
-    console.error(err);
+    res.json(err.message);
   }
 });
 
@@ -221,7 +221,7 @@ router.post("/", async (req, res) => {
     await Itenary.create(req.body);
     res.redirect("/itenaries");
   } catch (err) {
-    console.log(err.message);
+    res.json(err.message);
   }
 });
 

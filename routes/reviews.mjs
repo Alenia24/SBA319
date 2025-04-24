@@ -16,13 +16,17 @@ router.get("/", async (req, res) => {
       filter.destination = { $regex: req.query.destination, $options: "i" };
     }
     if (req.query.rating) {
-      filter.rating = Number(req.query.rating) ;
+      filter.rating = Number(req.query.rating);
     }
 
     const reviews = await Review.find(filter);
+
+    if (!reviews || reviews.length === 0) {
+      return res.json("No reviews found.");
+    }
     res.json(reviews);
   } catch (err) {
-    console.log(err);
+    res.json(err.message);
   }
 });
 
@@ -201,53 +205,55 @@ router.get("/seed", async (req, res) => {
     ]);
     res.redirect("/reviews");
   } catch (err) {
-    console.error(err);
+    res.json(err.message);
   }
 });
 
 // GET a review by its id
 router.get("/:id", async (req, res) => {
-    try {
-        const review = await Review.findById(req.params.id);
+  try {
+    const review = await Review.findById(req.params.id);
 
-        res.json(review)
-    } catch (err) {
-        console.log(err);
+    if (!review) {
+      res.json({ message: "No review found" });
     }
-})
+
+    res.json(review);
+  } catch (err) {
+    res.json({ message: "Invalid review ID" });
+  }
+});
 
 // DELETE a review by its id
 router.delete("/:id", async (req, res) => {
-    try {
-        await Review.findByIdAndDelete(req.params.id);
+  try {
+    await Review.findByIdAndDelete(req.params.id);
 
-        res.redirect("/reviews")
-    } catch (err) {
-        console.log(err);
-    }
-})
+    res.redirect("/reviews");
+  } catch (err) {
+    res.json({ message: "Invalid review ID" });
+  }
+});
 
 // Update an existing review by id
 router.put("/:id", async (req, res) => {
-    try {
-        await Review.findByIdAndUpdate(req.params.id, req.body)
+  try {
+    await Review.findByIdAndUpdate(req.params.id, req.body);
 
-        res.redirect("/reviews");
-    } catch(err) {
-        console.log(err);
-    }
-})
+    res.redirect("/reviews");
+  } catch (err) {
+    res.json({ message: "Invalid review ID" });
+  }
+});
 
-// POST Create a new review 
+// POST Create a new review
 router.post("/", async (req, res) => {
   try {
     await Review.create(req.body);
     res.redirect("/reviews");
   } catch (err) {
-    console.log(err);
+    res.json(err.message);
   }
 });
-
-
 
 export default router;
