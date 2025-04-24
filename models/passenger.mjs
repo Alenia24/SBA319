@@ -1,4 +1,3 @@
-import { text } from "express";
 import mongoose from "mongoose";
 
 const emergency_contactSchema = new mongoose.Schema({
@@ -19,7 +18,7 @@ const passengerSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-passengerSchema.index({ name: text });   
+passengerSchema.index({ name: "text" });   
 
 const Passenger = mongoose.model("Passenger", passengerSchema);
 
