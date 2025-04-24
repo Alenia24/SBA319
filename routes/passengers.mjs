@@ -3,25 +3,26 @@ import Passenger from "../models/passenger.mjs";
 
 const router = express.Router();
 
+// Not exposed to client
 // Get all the passengers
-router.get("/", async (req, res) => {
-  try {
-    const filter = {};
+// router.get("/", async (req, res) => {
+//   try {
+//     const filter = {};
 
-    if (req.query.name) {
-      filter.$text = { $search: req.query.name };
-    }
+//     if (req.query.name) {
+//       filter.$text = { $search: req.query.name };
+//     }
 
-    const passengers = await Passenger.find(filter);
+//     const passengers = await Passenger.find(filter);
 
-    if (!passengers || passengers.length === 0) {
-      return res.json("No Passengers found.");
-    }
-    res.json(passengers);
-  } catch (err) {
-    res.json(err.message);
-  }
-});
+//     if (!passengers || passengers.length === 0) {
+//       return res.json("No Passengers found.");
+//     }
+//     res.json(passengers);
+//   } catch (err) {
+//     res.json(err.message);
+//   }
+// });
 
 // SEED the route(database)
 router.get("/seed", async (req, res) => {
@@ -262,19 +263,20 @@ router.get("/seed", async (req, res) => {
   }
 });
 
-// GET a passenger by its id
-router.get("/:id", async (req, res) => {
-  try {
-    const passenger = await Passenger.findById(req.params.id);
+// Not exposed to clients
+// // GET a passenger by its id
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const passenger = await Passenger.findById(req.params.id);
 
-    if (!passenger) {
-      res.json({ message: "No passenger found." });
-    }
-    res.json(passenger);
-  } catch (err) {
-    res.json({ message: "Invalid passenger ID" });
-  }
-});
+//     if (!passenger) {
+//       res.json({ message: "No passenger found." });
+//     }
+//     res.json(passenger);
+//   } catch (err) {
+//     res.json({ message: "Invalid passenger ID" });
+//   }
+// });
 
 // DELETE a passenger by its id
 router.delete("/:id", async (req, res) => {
